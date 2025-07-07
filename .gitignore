@@ -97,3 +97,14 @@ InitTestScene*.unity*
 
 # Auto-generated scenes by play mode tests
 /[Aa]ssets/[Ii]nit[Tt]est[Ss]cene*.unity*
+/server/ApiServer.Tests/bin/*
+/server/ApiServer.Tests/obj
+/server/BatchJobServer/obj
+/server/BenchMark/bin/*
+/server/BenchMark/obj
+/server/Binary/Debug/*
+/server/Library/obj/*
+/server/LobbyServer/obj/*
+/server/DummyClient/obj/*
+/server/CommunityServer/obj/*
+/server/Library/bin/*
