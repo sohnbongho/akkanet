@@ -100,5 +100,7 @@ InitTestScene*.unity*
 
 /GameServer/bin/*
 /GameServer/obj/*
+/ThreadTest/bin/*
+/ThreadTest/obj/*
 
 
