@@ -9,6 +9,7 @@ public partial class UserSessionActor : ReceiveActor
 
     }
     private readonly int _id;
+    private int _count;
     public UserSessionActor(int id) : base()
     {
         _id = id;
@@ -27,6 +28,7 @@ public partial class UserSessionActor : ReceiveActor
         //start id:9 ThreadId: 23
         //start id:2 ThreadId: 20
         //start id:3 ThreadId: 23
+
         //end id:1 ThreadId: 21
         //end id:0 ThreadId: 23
         //end id:9 ThreadId: 20
@@ -37,9 +39,14 @@ public partial class UserSessionActor : ReceiveActor
         //end id:8 ThreadId: 23
         //end id:4 ThreadId: 20
         //end id:2 ThreadId: 22
-        Console.WriteLine($"start id:{_id} ThreadId:{Thread.CurrentThread.ManagedThreadId}");
+
+        // 위와 같이 await 다음에 ThreadId가 달라진다
+        var count = Interlocked.Increment(ref _count); 
+        Console.WriteLine($"start id:{_id} ThreadId:{Thread.CurrentThread.ManagedThreadId} count:{count}");
         await Task.Delay(1000);
-        Console.WriteLine($"end id:{_id} ThreadId:{Thread.CurrentThread.ManagedThreadId}");
+        Console.WriteLine($"end   id:{_id} ThreadId:{Thread.CurrentThread.ManagedThreadId} count:{count}");
+
+        
 
         return true;
     }

@@ -1,5 +1,4 @@
 ﻿using Akka.Actor;
-using Akka.IO;
 
 namespace ThreadTest;
 
@@ -21,7 +20,7 @@ public class UserManagerActor : ReceiveActor
     {
         base.PreStart();
 
-        for (int i = 0; i < _maxUserCount; ++i) 
+        for (int i = 0; i < _maxUserCount; ++i)
         {
             var sessionProp = Props.Create(() => new UserSessionActor(i));
             var userRef = Context.ActorOf(sessionProp);
@@ -41,9 +40,12 @@ public class UserManagerActor : ReceiveActor
     }
     private void RequestUser()
     {
-        foreach(var userRef in _userRefs) 
-        {            
-            userRef.Tell(new UserSessionActor.ThreadCheck());
+        foreach (var userRef in _userRefs)
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                userRef.Tell(new UserSessionActor.ThreadCheck());                
+            }            
         }
     }
     private void OnTimer(UserManagerActor.TickTimer msg)
