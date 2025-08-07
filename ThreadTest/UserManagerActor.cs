@@ -41,15 +41,10 @@ public class UserManagerActor : ReceiveActor
     }
     private void RequestUser()
     {
-        for (int i = 0; i < _maxUserCount; ++i)
-        {
-            var sessionProp = Props.Create(() => new UserSessionActor(i));
-            var userRef = Context.ActorOf(sessionProp);
-            _userRefs.Add(userRef);
+        foreach(var userRef in _userRefs) 
+        {            
             userRef.Tell(new UserSessionActor.ThreadCheck());
         }
-        
-
     }
     private void OnTimer(UserManagerActor.TickTimer msg)
     {
